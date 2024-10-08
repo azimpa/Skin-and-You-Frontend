@@ -1,0 +1,139 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+.home {
+  background-image: url("../assets/Images/BGimage.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 0.5rem 2rem;
+  border-radius: 50px;
+  margin: 20px 2rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.logo h1 {
+  font-size: 1.8rem;
+  color: #333;
+  font-weight: 700;
+}
+
+.logo span {
+  color: #ff6b6b;
+}
+
+.logo p {
+  font-size: 0.7rem;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-top: -5px;
+}
+
+nav ul {
+  display: flex;
+  list-style-type: none;
+}
+
+nav ul li {
+  margin: 0 0.8rem;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 600;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+}
+
+nav ul li a:hover,
+nav ul li a.active {
+  color: #ff6b6b;
+}
+
+.search-icon svg {
+  width: 20px;
+  height: 20px;
+  color: #333;
+  cursor: pointer;
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 2rem 4rem;
+}
+
+.hero-text {
+  color: white;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.hero-text h2 {
+  font-size: 3.5rem;
+  font-weight: 300;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  color: #ff9a9a;
+}
+
+.hero-text p {
+  font-size: 1.2rem;
+  font-weight: 300;
+  margin-bottom: 2rem;
+  max-width: 600px;
+}
+
+.cta-buttons button {
+  padding: 0.8rem 2rem;
+  margin-right: 1rem;
+  border: none;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+}
+
+.call-now {
+  background-color: #333;
+  color: white;
+}
+
+.book-now {
+  background-color: white;
+  color: #333;
+}
+
+.call-now:hover,
+.book-now:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
