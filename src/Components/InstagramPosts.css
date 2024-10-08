@@ -28,7 +28,7 @@
 }
 
 .instagram-title::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: 50%;
@@ -131,7 +131,7 @@
   .instagram-title {
     font-size: 2.2rem;
   }
-  
+
   .posts-grid {
     grid-template-columns: 1fr;
   }

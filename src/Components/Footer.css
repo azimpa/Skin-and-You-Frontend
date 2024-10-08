@@ -1,8 +1,8 @@
 .footer {
   background-color: #002d64;
   color: #ffffff;
-  padding: 70px 0 30px;
-  font-family: 'Poppins', sans-serif;
+  padding: clamp(40px, 5vw, 70px) 0 clamp(20px, 3vw, 30px);
+  font-family: "Poppins", sans-serif;
 }
 
 .footer-content {
@@ -10,12 +10,12 @@
   flex-wrap: wrap;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 clamp(10px, 2vw, 20px);
 }
 
 .footer h2 {
-  font-size: 1.4rem;
-  margin-bottom: 25px;
+  font-size: clamp(1.2rem, 2.5vw, 1.4rem);
+  margin-bottom: clamp(20px, 3vw, 25px);
   color: #ff9999;
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -24,7 +24,7 @@
 }
 
 .footer h2::after {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   bottom: -10px;
@@ -38,14 +38,14 @@
 .newsletter {
   flex: 1;
   min-width: 250px;
-  margin-right: 40px;
-  margin-bottom: 40px;
+  margin-right: clamp(20px, 3vw, 40px);
+  margin-bottom: clamp(30px, 4vw, 40px);
 }
 
 .get-in-touch p,
 .quick-links li {
-  margin-bottom: 15px;
-  font-size: 0.95rem;
+  margin-bottom: clamp(10px, 2vw, 15px);
+  font-size: clamp(0.9rem, 1.8vw, 0.95rem);
   line-height: 1.6;
 }
 
@@ -79,15 +79,15 @@
 
 .newsletter-form {
   display: flex;
-  margin-bottom: 25px;
+  margin-bottom: clamp(20px, 3vw, 25px);
 }
 
 .newsletter-form input {
   flex: 1;
-  padding: 12px 15px;
+  padding: clamp(10px, 1.5vw, 12px) clamp(12px, 2vw, 15px);
   border: none;
   border-radius: 5px 0 0 5px;
-  font-size: 0.9rem;
+  font-size: clamp(0.85rem, 1.7vw, 0.9rem);
   transition: box-shadow 0.3s ease;
 }
 
@@ -97,7 +97,7 @@
 }
 
 .newsletter-form button {
-  padding: 12px 20px;
+  padding: clamp(10px, 1.5vw, 12px) clamp(15px, 2.5vw, 20px);
   background-color: #ff9999;
   color: #002d64;
   border: none;
@@ -113,26 +113,26 @@
 }
 
 .newsletter h3 {
-  font-size: 1.1rem;
-  margin-bottom: 15px;
+  font-size: clamp(1rem, 2vw, 1.1rem);
+  margin-bottom: clamp(12px, 2vw, 15px);
   color: #ff9999;
 }
 
 .social-icons {
   display: flex;
-  gap: 15px;
+  gap: clamp(10px, 2vw, 15px);
 }
 
 .social-icons .icon {
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  width: 40px;
-  height: 40px;
+  width: clamp(35px, 5vw, 40px);
+  height: clamp(35px, 5vw, 40px);
   background-color: rgba(255, 153, 153, 0.1);
   color: #ff9999;
   border-radius: 50%;
-  font-size: 1.2rem;
+  font-size: clamp(1.1rem, 2.2vw, 1.2rem);
   transition: all 0.3s ease;
 }
 
@@ -147,14 +147,14 @@
   justify-content: space-between;
   align-items: center;
   max-width: 1200px;
-  margin: 40px auto 0;
-  padding: 20px 20px 0;
+  margin: clamp(30px, 4vw, 40px) auto 0;
+  padding: clamp(15px, 2.5vw, 20px) clamp(10px, 2vw, 20px) 0;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .footer-bottom p {
   color: rgba(255, 255, 255, 0.7);
-  font-size: 0.9rem;
+  font-size: clamp(0.85rem, 1.7vw, 0.9rem);
 }
 
 @media (max-width: 768px) {
@@ -166,12 +166,28 @@
   .quick-links,
   .newsletter {
     margin-right: 0;
-    margin-bottom: 40px;
+    margin-bottom: clamp(30px, 4vw, 40px);
   }
 
   .footer-bottom {
     flex-direction: column;
     text-align: center;
     gap: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .newsletter-form {
+    flex-direction: column;
+  }
+
+  .newsletter-form input,
+  .newsletter-form button {
+    width: 100%;
+    border-radius: 5px;
+  }
+
+  .newsletter-form input {
+    margin-bottom: 10px;
   }
 }
