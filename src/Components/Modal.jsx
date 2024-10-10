@@ -68,6 +68,8 @@ const AppointmentModal = ({ isOpen, onClose }) => {
         }
     };
 
+    const today = new Date().toISOString().split('T')[0];
+
     if (!isOpen) return null;
 
     return (
@@ -121,6 +123,7 @@ const AppointmentModal = ({ isOpen, onClose }) => {
                             value={formData.date}
                             onChange={handleDateChange}
                             required
+                            min={today}
                         />
                         <select
                             name="time"
