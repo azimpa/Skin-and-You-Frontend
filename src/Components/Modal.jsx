@@ -1,21 +1,40 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Modal.css';
 
 const AppointmentModal = ({ isOpen, onClose }) => {
-
     const API_URL = import.meta.env.VITE_API_URL;
 
-    const [formData, setFormData] = useState({ name: '', email: '', query: '', phone: '', message: '' });
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        query: '',
+        phone: '',
+        message: '',
+        date: '',
+        time: ''
+    });
+    const [availableSlots, setAvailableSlots] = useState([]);
 
     const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
+
+    const handleDateChange = async (e) => {
+        const date = e.target.value;
+        setFormData({ ...formData, date, time: '' });
+        try {
+            const response = await axios.get(`${API_URL}/api/appointments/available-slots?date=${date}`);
+            setAvailableSlots(response.data);
+        } catch (error) {
+            console.error('Error fetching available slots:', error);
+        }
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const { name, email, phone, query, message } = formData;
+        const { name, email, phone, query, message, date, time } = formData;
 
-        if (!name || !email || !phone || !query || !message) {
+        if (!name || !email || !phone || !query || !message || !date || !time) {
             return alert('Please fill in all fields');
         }
 
@@ -34,10 +53,10 @@ const AppointmentModal = ({ isOpen, onClose }) => {
                     query: '',
                     phone: '',
                     message: '',
+                    date: '',
+                    time: ''
                 });
                 onClose();
-            } else {
-                alert('Error booking appointment');
             }
         } catch (error) {
             console.error('Error:', error);
@@ -50,7 +69,6 @@ const AppointmentModal = ({ isOpen, onClose }) => {
     };
 
     if (!isOpen) return null;
-
 
     return (
         <div className="modal-overlay">
@@ -95,6 +113,27 @@ const AppointmentModal = ({ isOpen, onClose }) => {
                             placeholder="Your Phone"
                             required
                         />
+                    </div>
+                    <div className="form-row">
+                        <input
+                            type="date"
+                            name="date"
+                            value={formData.date}
+                            onChange={handleDateChange}
+                            required
+                        />
+                        <select
+                            name="time"
+                            value={formData.time}
+                            onChange={handleChange}
+                            required
+                            disabled={!formData.date}
+                        >
+                            <option value="">Select a time</option>
+                            {availableSlots.map(slot => (
+                                <option key={slot} value={slot}>{slot}</option>
+                            ))}
+                        </select>
                     </div>
                     <textarea
                         name="message"

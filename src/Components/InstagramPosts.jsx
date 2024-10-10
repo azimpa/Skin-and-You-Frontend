@@ -1,10 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './InstagramPosts.css';
-import Botox from '../assets/Videos/Botox.mp4'
-import Pores from '../assets/Videos/Pores.mp4'
-import TearTrough from '../assets/Videos/TearTrough.mp4'
+import axios from 'axios';
 
-const InstagramPost = ({ video, caption }) => (
+const InstagramPost = ({ video, caption, permalink }) => (
     <div className="instagram-post">
         {video ? (
             <div className="video-container">
@@ -15,38 +13,67 @@ const InstagramPost = ({ video, caption }) => (
         ) : (
             <p>No Video Found</p>
         )}
-        <p className="post-caption" dangerouslySetInnerHTML={{ __html: caption }} />
+        <p className="post-caption">{caption}</p>
+        {permalink && (
+            <a href={permalink} target="_blank" rel="noopener noreferrer" className="post-link">
+                Check it on!
+            </a>
+        )}
     </div>
 );
 
 const InstagramPosts = () => {
-    const posts = [
-        {
-            video: Pores,
-            caption: "Thinking those deep 'pores' will never go away? <a href='https://www.instagram.com/reel/DA0cKdfSrfo/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==' target='_blank' rel='noopener noreferrer'>Check it out on</a>!"
-        },
-        {
-            video: TearTrough,
-            caption: "Time to spill the beans on TearTrough Fillers! <a href='https://www.instagram.com/reel/C2mQiXKSgmS/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==' target='_blank' rel='noopener noreferrer'>Check it out on</a>!"
-        },
-        {
-            video: Botox,
-            caption: "Essential Dos and Dont's After Botox Treatment <a href='https://www.instagram.com/reel/C4vL9wCSV-W/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=='>Check it out on</a>!"
-        }
-    ];
+
+    const API_URL = import.meta.env.VITE_API_URL;
+
+    const [posts, setPosts] = useState([]);
+    const [visiblePostsCount, setVisiblePostsCount] = useState(2);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const fetchInstagramPosts = async () => {
+            try {
+                const response = await axios.get(`${API_URL}/api/instagram-feed`);
+                const fetchedPosts = response.data.map(post => ({
+                    id: post.id,
+                    video: post.media_url,
+                    caption: post.caption,
+                    permalink: post.permalink,
+                }));
+                setPosts(fetchedPosts);
+                setLoading(false);
+            } catch (error) {
+                console.error('Error fetching Instagram data:', error);
+                setError('Failed to fetch Instagram data');
+                setLoading(false);
+            }
+        };
+
+        fetchInstagramPosts();
+    }, []);
+
+    const handleLoadMore = () => {
+        setVisiblePostsCount((prevCount) => prevCount + 3);
+    };
+
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p>{error}</p>;
 
     return (
         <div className="instagram-posts-container">
             <h2 className="latest-text">LATEST</h2>
             <h1 className="instagram-title">Instagram Post</h1>
             <div className="posts-grid">
-                {posts.map((post, index) => (
-                    <InstagramPost key={index} {...post} />
+                {posts.slice(0, visiblePostsCount).map((post) => (
+                    <InstagramPost key={post.id} {...post} />
                 ))}
             </div>
-            <div className="button-container">
-                <button className="load-more-btn">LOAD MORE</button>
-            </div>
+            {visiblePostsCount < posts.length && (
+                <div className="button-container">
+                    <button className="load-more-btn" onClick={handleLoadMore}>LOAD MORE</button>
+                </div>
+            )}
         </div>
     );
 };

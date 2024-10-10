@@ -1,13 +1,13 @@
 .instagram-posts-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 40px 25px;
+  padding: clamp(30px, 5vw, 60px) clamp(15px, 3vw, 25px);
   font-family: "Poppins", sans-serif;
 }
 
 .latest-text {
-  color: #ff6b6b;
-  font-size: 1.2rem;
+  color: #e74c3c;
+  font-size: 1rem;
   font-weight: 600;
   margin-bottom: 10px;
   text-transform: uppercase;
@@ -16,11 +16,11 @@
 }
 
 .instagram-title {
-  color: #002d64;
+  color: #2c3e50;
   font-size: 2.8rem;
   font-weight: 700;
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 50px;
   text-transform: uppercase;
   letter-spacing: 2px;
   padding: 10px 0;
@@ -35,15 +35,15 @@
   transform: translateX(-50%);
   width: 60px;
   height: 4px;
-  background-color: #ff6b6b;
+  background-color: #e74c3c;
   border-radius: 2px;
 }
 
 .posts-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
-  margin-bottom: 40px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  margin-bottom: 50px;
 }
 
 .instagram-post {
@@ -52,19 +52,21 @@
   align-items: center;
   transition: transform 0.3s, box-shadow 0.3s;
   background-color: #ffffff;
-  border-radius: 15px;
+  border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  position: relative;
+  padding-bottom: 60px;
 }
 
 .instagram-post:hover {
   transform: translateY(-10px);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
 }
 
 .video-container {
   width: 100%;
-  height: 300px;
+  aspect-ratio: 1;
   position: relative;
   overflow: hidden;
 }
@@ -72,7 +74,7 @@
 .video-container video {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   transition: transform 0.3s ease;
 }
 
@@ -81,29 +83,46 @@
 }
 
 .post-caption {
-  color: #002d64;
+  color: #34495e;
   font-size: 1rem;
   text-align: center;
   line-height: 1.6;
-  margin: 20px;
-  padding: 0 15px;
+  margin: 25px 25px 0;
+  padding: 0 20px;
 }
 
 .post-caption a {
-  color: #ff6b6b;
+  color: #e74c3c;
   text-decoration: none;
   font-weight: 600;
   transition: color 0.3s ease;
 }
 
 .post-caption a:hover {
-  color: #ff4757;
+  color: #c0392b;
+}
+
+.post-link {
+  display: inline-block;
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #3498db;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.post-link:hover {
+  color: #2980b9;
 }
 
 .button-container {
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 30px;
 }
 
 .load-more-btn {
@@ -114,30 +133,90 @@
   cursor: pointer;
   transition: all 0.3s ease;
   font-weight: 600;
-  background-color: #ff6b81;
+  background-color: #e74c3c;
   color: white;
   text-transform: uppercase;
   letter-spacing: 1px;
-  box-shadow: 0 4px 15px rgba(255, 107, 129, 0.3);
+  box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
 }
 
 .load-more-btn:hover {
-  background-color: #ff4757;
-  box-shadow: 0 6px 20px rgba(255, 71, 87, 0.4);
+  background-color: #c0392b;
+  box-shadow: 0 6px 20px rgba(192, 57, 43, 0.4);
   transform: translateY(-2px);
 }
 
-@media (max-width: 768px) {
+@media (min-width: 1200px) {
+  .posts-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
   .instagram-title {
-    font-size: 2.2rem;
+    font-size: 2.4rem;
+  }
+
+  .posts-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+  }
+
+  .instagram-posts-container {
+    padding: 40px 20px;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 767px) {
+  .instagram-title {
+    font-size: 2rem;
+    margin-bottom: 30px;
+  }
+
+  .posts-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .instagram-posts-container {
+    padding: 30px 15px;
+  }
+
+  .post-caption {
+    font-size: 0.9rem;
+    margin: 15px 15px 0;
+    padding: 0 15px;
+  }
+}
+
+@media (max-width: 575px) {
+  .instagram-title {
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+  }
+
+  .latest-text {
+    font-size: 0.9rem;
+    letter-spacing: 2px;
   }
 
   .posts-grid {
     grid-template-columns: 1fr;
+    gap: 25px;
   }
 
-  .instagram-post {
-    max-width: 400px;
-    margin: 0 auto;
+  .instagram-posts-container {
+    padding: 25px 10px;
+  }
+
+  .post-caption {
+    font-size: 0.9rem;
+    margin: 15px 10px 0;
+    padding: 0 10px;
+  }
+
+  .load-more-btn {
+    padding: 12px 25px;
+    font-size: 0.9rem;
   }
 }
